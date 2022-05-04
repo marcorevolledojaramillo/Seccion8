@@ -82,5 +82,5 @@ module.exports = {
     postUsuarios,
     putUsuarios,
     deleteUsuarios,
-    patchUsuarios
+    // patchUsuarios
 }
