@@ -8,7 +8,8 @@ class Server{
     constructor(){
         this.app=express();
         this.port=process.env.PORT;
-        this.userPATH='/api/usuarios';
+        this.userPath='/api/usuarios';
+        this.authPath = '/api/auth'
 
         //Conectar Databbase
         this.conectarDB();
@@ -36,7 +37,8 @@ class Server{
 
     routes(){
 
-        this.app.use(this.userPATH, require('../routes/usuarios'))
+        this.app.use(this.authPath, require('../routes/auth'));
+        this.app.use(this.userPath, require('../routes/usuarios'));
     }
 
     listen(){

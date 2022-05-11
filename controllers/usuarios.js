@@ -5,18 +5,18 @@ const { response } = require('express');
 const Usuario = require('../models/usuario');
 
 
-const getUsuarios = async(req, res = response) => {
+const getUsuarios = async (req, res = response) => {
 
-    const {limite=5, desde=0, rol} = req.query;
-    
+    const { limite = 5, desde = 0, rol } = req.query;
+
     const [totalBase, usuarios] = await Promise.all([
 
-        Usuario.count({estado:true}),
-        Usuario.find({estado:true})
+        Usuario.count({ estado: true }),
+        Usuario.find({ estado: true })
             .skip(desde)
             .limit(limite)
     ]);
-    const total= usuarios.length
+    const total = usuarios.length
     res.json({
         totalBase,
         total,
@@ -59,20 +59,20 @@ const putUsuarios = async (req, res = response) => {
 
 
 }
-const deleteUsuarios = async(req, res) => {
-    const {id}=req.params;
-
+const deleteUsuarios = async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+   
     // const usuario= await Usuario.findByIdAndDelete(id);
-    const usuario= await Usuario.findByIdAndUpdate(id,{estado:false})
-
+    const usuarioBorrado = await Usuario.findByIdAndUpdate(id, { estado: false });
     
-    res.json({
-        usuario
+    res.status(200).json({
+        usuarioBorrado
     });
 }
 // const patchUsuarios = (req, res) => {
 //     const { id } = req.params;
-    
+
 //     res.json({
 //         msg: 'Patch API-Controller'
 //     });
