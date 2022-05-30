@@ -2,12 +2,12 @@
 const bcryptjs = require('bcryptjs');
 const { response } = require('express');
 
-const Usuario = require('../models/usuario');
+const {Usuario} = require('../models');
 
 
 const getUsuarios = async (req, res = response) => {
 
-    const { limite = 5, desde = 0, rol } = req.query;
+    const { limite = 5, desde = 0 } = req.query;
 
     const [totalBase, usuarios] = await Promise.all([
 
@@ -17,7 +17,7 @@ const getUsuarios = async (req, res = response) => {
             .limit(limite)
     ]);
     const total = usuarios.length
-    res.json({
+    return res.json({
         totalBase,
         total,
         usuarios
@@ -37,7 +37,7 @@ const postUsuarios = async (req, res) => {
     //Guardar
     await usuario.save();
 
-    res.status(201).json({
+    return res.status(201).json({
         usuario
     });
 }
@@ -53,7 +53,7 @@ const putUsuarios = async (req, res = response) => {
 
     const usuario = await Usuario.findByIdAndUpdate(id, resto)
 
-    res.status(202).json({
+    return res.status(202).json({
         usuario
     });
 
@@ -66,7 +66,7 @@ const deleteUsuarios = async (req, res) => {
     // const usuario= await Usuario.findByIdAndDelete(id);
     const usuarioBorrado = await Usuario.findByIdAndUpdate(id, { estado: false });
     
-    res.status(200).json({
+    return res.status(200).json({
         usuarioBorrado
     });
 }
