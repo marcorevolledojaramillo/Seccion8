@@ -55,7 +55,16 @@ const validacionCategoria=async(categoria='') => {
             throw new Error('La categoria es obligatoria')
         };
         categoriaExisteById;
+}
 
+const coleccionesPermitida = (coleccion= '', colecciones=[])=>{
+
+    const ExisteColeccion = colecciones.includes(coleccion);
+    if(!ExisteColeccion){
+        throw new Error('La coleccion ingresada, no es una coleccion valida')
+    }
+
+    return true;
 }
 
 module.exports = {
@@ -65,6 +74,7 @@ module.exports = {
     categoriaExisteById,
     categoriaExisteByNombre,
     ProductoExisteById,
-    validacionCategoria
+    validacionCategoria,
+    coleccionesPermitida
 
 }

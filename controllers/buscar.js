@@ -1,7 +1,7 @@
 const { response } = require("express");
 const { default: mongoose } = require("mongoose");
+
 const { Usuario, Producto, Categoria } = require("../models");
-const { ObjectId } = require('mongoose').Types.ObjectId;
 
 const coleccionesPermitidas = [
     'categorias',
